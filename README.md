@@ -15,7 +15,7 @@ The data I propose to visualize for my project is [Data on COVID-19 Vaccinations
 
 ## 3. Sketches
 
-To help answer these questions I've conceptualized a visualization dashboard in the following sketch. In the top left I hope to create an interactive map of the US using the geopath library as demonstrated in the `Circles on Map` demo from Professor Kelleher. On this map I would like to show the overall vaccination level of that state using doughnut charts. The inner ring of the doughnut chart will indicate the overall vaccination level (which is also shown in text in the center of the doughnut) and the outer ring will show the vaccine utilization for the state. The map will also act as filter tool allowing the user to select one or more states to visualize the data of. Below the map I will embed a bar chart visualization of the number of vaccines distributed in the given day. On the right I will provide the user filter controls to select the time range to observe and help the user find and select states for consideration.
+To help answer these questions I've conceptualized a visualization dashboard in the following sketch. In the top left I hope to create an interactive map of the US using the geopath library. On this map I would like to show the overall vaccination level of that state using doughnut charts. The inner ring of the doughnut chart will indicate the overall vaccination level (which is also shown in text in the center of the doughnut) and the outer ring will show the vaccine utilization for the state. The map will also act as filter tool allowing the user to select one or more states to visualize the data of. Below the map I will embed a bar chart visualization of the number of vaccines distributed in the given day. On the right I will provide the user filter controls to select the time range to observe and help the user find and select states for consideration.
 
 ![image](/img/dashboard_sketch_v2.png)
 
@@ -44,6 +44,37 @@ As I felt that this scatterplot was not displaying the data as clearly as possib
 [![image](/img/wk4_barchart.png)](https://vizhub.com/PeterVanNostrand/433774e3a12845a48a3bb98b683ba708)
 
 Here we can see that the use of bars significantly clarifies the visualization as area is one of the most significant channels for human interpretation. This also prevent the overlap of mark which was present in the previous figure and allows us to see that there are a few missing days of data around June 1st and July 4th. We may need to impute this data in the future for operations such as computing a moving average.
-## 5. Open Questions
 
-I believe the path to creating the map visualization is rather straightforward, the open question is the multi-state aggregation and COVID data. In order to perform these operations I need to learn how to better manipulate the data array that the CSV loader returns. In particular I need to determine how to perform some database like operations such as GROUP BY for the aggregation and JOIN for adding the COVID data.
+### 4.3 Interactive Bar
+
+The next major iteration of this was to add several interactive features. The picture below shows a revised version which allows the user to select the state to plot from the drop down, animated bar replacement when the selected state changes, and a hover interaction which highlights the selected bar and adds a tooltip. Critically this allows the user access to the data for all states compared to previous versions which were hard coded to filter to one state
+
+[![image](/img/interactive_bar_1.png)](https://vizhub.com/PeterVanNostrand/32dd78ca3b604a989206ed054a43f00f)
+
+[![image](/img/interactive_bar_2.png)](https://vizhub.com/PeterVanNostrand/32dd78ca3b604a989206ed054a43f00f)
+
+### 4.4 Prototype Map
+
+To build towards the map with doughnut charts I started by creating a simple map with circles plot where the radius of each circle is proportional to the fraction of the eligible population who are fully vaccinated as of the latest available data (09/04/2021). I have built this visualization with future filtering in mind and so have written the implementation to take the date to visualize as a parameter. This will make future iterations simpler and make for easier connection to the filter box and bar chart.
+
+[![image](/img/map_with_circles.png)](https://vizhub.com/PeterVanNostrand/54d07b8746334cae8694b1687cc8e204)
+## 5. Schedule of Deliverables
+
+- Improve map visualization 10/27
+  - Convert visualization of vaccination percent from map with circles into map with doughnut charts
+  - Add second ring to doughnuts to encode the fraction of vaccination doses used
+  - Add mouse zooming with scroll wheel
+- Add map interaction 11/03
+  - On mouse hover highlight that state
+  - Display tooltip with detailed data: percent fully vaccinated, percent partially vaccinated, percent doses used, population
+- Dashboard prototype 11/10
+  - Combine bar chart and map into a single visualization
+  - Create line chart of the fraction of doses used
+- Advanced filtering 11/17
+  - Add filter control box with start date and end date
+  - Add toggle for visualizing fully vaccinated vs partially vaccinated
+  - These should affect data in all three visualizations
+- Cross-visualization interaction 12/01
+  - Connect hover filtering from bar chart to map
+  - Connect hover filtering from map to bar chart and line chart
+- Debugging and cleanup 12/08
