@@ -58,6 +58,12 @@ The next major iteration of this was to add several interactive features. The pi
 To build towards the map with doughnut charts I started by creating a simple map with circles plot where the radius of each circle is proportional to the fraction of the eligible population who are fully vaccinated as of the latest available data (09/04/2021). I have built this visualization with future filtering in mind and so have written the implementation to take the date to visualize as a parameter. This will make future iterations simpler and make for easier connection to the filter box and bar chart.
 
 [![image](/img/map_with_circles.png)](https://vizhub.com/PeterVanNostrand/54d07b8746334cae8694b1687cc8e204)
+
+## 4.5 Iterated Map
+
+For this weeks assignment I updated my prototype map of COVID-19 vaccine data to use doughnut charts rather than simple circles. Getting these working was a bit of a challenge, but I think it was worth the effort. Each doughnut consists of two arc elements and an outer circle. The inner arc in blue is the percentage of state residents fully vaccinated, while the outer arc in green represents the percentage of COVID-19 vaccine doses used. To ensure that the charts don't overlap which each other I'm using the d3 force function to move each chart subtly until they no longer overlap. In the center of each chart it a value reading the percentage of residents fully vaccinated. For some reason there is a bug when brushing that causes this number to be newly appended rather than updated. I think this has to do with how I'm filtered the data on the brush update, but I'll have to spend some time to debug this. Any suggestions would be appreciated. Brushing seems to be updating the arcs successfully to match the vaccination level at the end of the selected range.I also plan on adding a legend for reading these charts in the near future.
+
+[![image](/img/map_with_doughnuts.png)](https://vizhub.com/PeterVanNostrand/197316bcd3424f2e98de60ca9985beae)
 ## 5. Schedule of Deliverables
 
 - Improve map visualization 10/27
