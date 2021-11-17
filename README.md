@@ -33,7 +33,7 @@ This dashboard will have several interactive components to allow the user to sel
 
 ### 4.1 Scatterplot
 
-So far I’ve created two proof of concept visualization of this data. The first is a simple scatterplot which shows the daily number of vaccinations given. For this demonstration I have filtered the data to only show the vaccines distributed in the state of Massachusetts. This is because the amount of data for every day in every state is too large to reasonably display on a single plot raw. In the future I would like to aggregate the data over a set of states to show total doses administered in that region.
+The first proof of concept visualization I created for this data is a simple scatterplot which shows the daily number of vaccinations given. For this demonstration I have filtered the data to only show the vaccines distributed in the state of Massachusetts. This is because the amount of data for every day in every state is too large to reasonably display on a single plot raw. In the future I would like to aggregate the data over a set of states to show total doses administered in that region.
 
 [![image](/img/wk3_scatterplot.png)](https://vizhub.com/PeterVanNostrand/56fccd1bb8924f7e93071a64a7cfd67d)
 
@@ -72,6 +72,11 @@ For this weeks assignment I worked on ironing out some bugs in my COVID-19 vacci
 [![image](/img/map_with_doughnuts_bugged.png)](https://vizhub.com/PeterVanNostrand/197316bcd3424f2e98de60ca9985beae)
 [![image](/img/map_with_doughnuts_debugged.png)](https://vizhub.com/PeterVanNostrand/7b144d21b3634dbab08c6721cd402d2f)
 
+## 4.7 Interactive Filtering
+
+Now that brushing the histogram correctly updates the map I worked to allow the reverse direction and have the map update the histogram. To do this I implemented an interaction which allows the user to click on a state or a doughnut chart in the map and switch the histogram to visualize the historical data for vaccinations in that state. This augments the dropdown list to allow the user to more quickly switch between different states. To allow the user to easily locate the state they are looking for in the map I implemented panning and zooming of the map element and added a tooltip to the map which displays the name of the state currently being hovered. The result of these changes can be seen below. The map state selection integrates well with the histogram brushing, allowing both filters to be applied at once or independently. The map selection also updates the selected drop down item for consistency.
+
+[![image](/img/interactive_dashboard_zoomed.png)](https://vizhub.com/PeterVanNostrand/e366297bd4704e70b3690f402148151b)
 ## 5. Schedule of Deliverables
 
 - Improve map visualization 10/27
