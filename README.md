@@ -76,7 +76,14 @@ For this weeks assignment I worked on ironing out some bugs in my COVID-19 vacci
 
 Now that brushing the histogram correctly updates the map I worked to allow the reverse direction and have the map update the histogram. To do this I implemented an interaction which allows the user to click on a state or a doughnut chart in the map and switch the histogram to visualize the historical data for vaccinations in that state. This augments the dropdown list to allow the user to more quickly switch between different states. To allow the user to easily locate the state they are looking for in the map I implemented panning and zooming of the map element and added a tooltip to the map which displays the name of the state currently being hovered. The result of these changes can be seen below. The map state selection integrates well with the histogram brushing, allowing both filters to be applied at once or independently. The map selection also updates the selected drop down item for consistency.
 
-[![image](/img/interactive_dashboard_zoomed.png)](https://vizhub.com/PeterVanNostrand/e366297bd4704e70b3690f402148151b)
+[![image](/img/interactive_dashboard_zoomed.png)](https://vizhub.com/PeterVanNostrand/81ecde3d496f4bc6b819602ad836c34c)
+
+## 4.8 Line Chart and User Experience
+
+This week I began work on the line chart of COVID vaccine utilization which can be seen in the upper right corner of the figure below. This line plot shows the percentage of available doses used over time for the selected state. I also took some time to add clear axes labels for the bar chart and an appropriate legend for the map plot. Next week I plan to connect the line chart to state filtering from the map and the date filtering from the bar plot so that it is responsive to all interactive elements. With a bit of polish this will completed the dashboard.
+
+[![image](/img/dashboard_labels.png)](https://vizhub.com/PeterVanNostrand/e366297bd4704e70b3690f402148151b)
+
 ## 5. Schedule of Deliverables
 
 - Improve map visualization 10/27
