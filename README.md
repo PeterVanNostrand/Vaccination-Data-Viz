@@ -1,12 +1,12 @@
 # Vaccination-Data-Viz
 
-A visualization of US daily vaccinations in part of 2021. Created for CS573 Data Visualization
+This repository is a live document chronicling the development of a dashboard visualization for daily US COVID-19 vaccinations in part of 2021. This project was created for CS573 Data Visualization at Worcester Polytechnic Institute in Fall 2021. For the completed visualization see [Section 5, Final Visualization](#5-final-dashboard). Clicking on any of the images will take you to a VizHub page where you can explore each version of the dashboard or fork it for your own project!
 
 ## 1. Data: US Vaccination Data by State/Territory
 
-The data I propose to visualize for my project is [Data on COVID-19 Vaccinations by Our World in Data](https://github.com/owid/covid-19-data/tree/master/public/data/vaccinations). This dataset contains information about the number of COVID-19 vaccinations given per day by US State/Territory as well as information about the total vaccination level of each state, number of doses available, and total dose utilization. I have filtered this dataset to time period 04/01/2021 - 09/04/2021 to reduce the quantity of data to process for this visualization.
+The data I propose to visualize for this project is [Data on COVID-19 Vaccinations by Our World in Data](https://github.com/owid/covid-19-data/tree/master/public/data/vaccinations). This dataset contains information about the number of COVID-19 vaccinations given per day by US State/Territory as well as information about the total vaccination level of each state, number of doses available, and total dose utilization. I have filtered this dataset to time period 04/01/2021 - 09/04/2021 to reduce the quantity of data to process for this visualization.
 
-## 2. Questions
+## 2. Research Questions
 
 - How has the number of vaccines given changed over time?
 - Which state has the highest per capita vaccinate rate for a given period?
@@ -15,7 +15,7 @@ The data I propose to visualize for my project is [Data on COVID-19 Vaccinations
 
 ## 3. Sketches
 
-To help answer these questions I've conceptualized a visualization dashboard in the following sketch. In the top left I hope to create an interactive map of the US using the geopath library. On this map I would like to show the overall vaccination level of that state using doughnut charts. The inner ring of the doughnut chart will indicate the overall vaccination level (which is also shown in text in the center of the doughnut) and the outer ring will show the vaccine utilization for the state. The map will also act as filter tool allowing the user to select one or more states to visualize the data of. Below the map I will embed a bar chart visualization of the number of vaccines distributed in the given day. On the right I will provide the user filter controls to select the time range to observe and help the user find and select states for consideration.
+To help answer these questions I've conceptualized a visualization dashboard in the following sketch. In the top left I hope to create an interactive map of the US using the `geopath` library. On this map I would like to show the overall vaccination level of that state using doughnut charts. The inner ring of the doughnut chart will indicate the overall vaccination level (which is also shown in text in the center of the doughnut) and the outer ring will show the vaccine utilization for the state. These doughnut charts were inspired by the Apple Fit workout rings and should be understandable by a lay user. The map will also act as filter tool allowing the user to select one or more states to visualize the data of. Below the map I will embed a bar chart visualization of the number of vaccines distributed in the given day. On the right I will provide the user filter controls to select the time range to observe and help the user find and select states for consideration.
 
 ![image](/img/dashboard_sketch_v2.png)
 
@@ -59,13 +59,13 @@ To build towards the map with doughnut charts I started by creating a simple map
 
 [![image](/img/map_with_circles.png)](https://vizhub.com/PeterVanNostrand/54d07b8746334cae8694b1687cc8e204)
 
-## 4.5 Iterated Map
+## 4.5 First Dashboard
 
 For this weeks assignment I updated my prototype map of COVID-19 vaccine data to use doughnut charts rather than simple circles. Getting these working was a bit of a challenge, but I think it was worth the effort. Each doughnut consists of two arc elements and an outer circle. The inner arc in blue is the percentage of state residents fully vaccinated, while the outer arc in green represents the percentage of COVID-19 vaccine doses used. To ensure that the charts don't overlap which each other I'm using the d3 force function to move each chart subtly until they no longer overlap. In the center of each chart it a value reading the percentage of residents fully vaccinated. For some reason there is a bug when brushing that causes this number to be newly appended rather than updated. I think this has to do with how I'm filtered the data on the brush update, but I'll have to spend some time to debug this. Any suggestions would be appreciated. Brushing seems to be updating the arcs successfully to match the vaccination level at the end of the selected range.I also plan on adding a legend for reading these charts in the near future.
 
 [![image](/img/map_with_doughnuts.png)](https://vizhub.com/PeterVanNostrand/197316bcd3424f2e98de60ca9985beae)
 
-## 4.6 Debugged Map
+## 4.6 Debugged Dashboard
 
 For this weeks assignment I worked on ironing out some bugs in my COVID-19 vaccination dashboard. Last week I mentioned how when brushing on this plot there was a set of bugs which caused the text fields and marker components (i.e. the paths and circles that make the doughnuts) to be duplicated when updating as part of brushing the lower plot. This resulted in these elements stacking on top of each other and lagged the page a bit when sequential brushing lead to a buildup of these elements. To fix this I've refactored my map code to draw all the elements for a state in one pass as part of a group, with the elements within the group being updated and redrawn as necessary for brushing. As a result this cross plot interaction is now working as corrected! I also moved the JSON file for each state location to a GitHub gist. One task I investigated heavily but have not solved yet is being able to both brush and handle mouse events for the bar chart. My previous iterations included a tooltip and callout when hovering the histogram bars, but the d3 brush library interferes with this by placing its brush box over these elements. I investigate several solutions which involve dynamically showing/hiding the brush box on mouse down, but haven't found a good solution yet. At the moment I have a toggleable line which switches between the two. Any pointers would appreciated. Pre and post fix images are below.
 
@@ -84,23 +84,10 @@ This week I began work on the line chart of COVID vaccine utilization which can 
 
 [![image](/img/dashboard_labels.png)](https://vizhub.com/PeterVanNostrand/e366297bd4704e70b3690f402148151b)
 
-## 5. Schedule of Deliverables
+## 5. Final Dashboard
 
-- Improve map visualization 10/27
-  - Convert visualization of vaccination percent from map with circles into map with doughnut charts
-  - Add second ring to doughnuts to encode the fraction of vaccination doses used
-  - Add mouse zooming with scroll wheel
-- Add map interaction 11/03
-  - On mouse hover highlight that state
-  - Display tooltip with detailed data: percent fully vaccinated, percent partially vaccinated, percent doses used, population
-- Dashboard prototype 11/10
-  - Combine bar chart and map into a single visualization
-  - Create line chart of the fraction of doses used
-- Advanced filtering 11/17
-  - Add filter control box with start date and end date
-  - Add toggle for visualizing fully vaccinated vs partially vaccinated
-  - These should affect data in all three visualizations
-- Cross-visualization interaction 12/01
-  - Connect hover filtering from bar chart to map
-  - Connect hover filtering from map to bar chart and line chart
-- Debugging and cleanup 12/08
+Below is the final result of this visualization project, a fully interactive COVID-19 Vaccination dashboard. The dashboard consists of three main components: a national map with doughnut markers, a bar chart of daily doses administered, and a line chart of available dose utilization.
+
+[![image](/img/dashboard_final.png)](https://vizhub.com/PeterVanNostrand/b0e60911c76d4548810a1873b7bb66c2)
+
+The map and bar chart elements feature interactions which change the data to be visualized. Using the dropdown or by clicking on a state or marker in the map the user can select which region they would like to see vaccination data for with the bar and line charts updating accordingly. By brushing the bar chart the user can also select the time period they would like to visualize. After brushing the line chart will adjust to match the brushed period and the map markers will update to show the national state of vaccination as of the last day of the brushed range.
