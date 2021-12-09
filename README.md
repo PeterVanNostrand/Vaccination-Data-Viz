@@ -2,6 +2,8 @@
 
 This repository is a live document chronicling the development of a dashboard visualization for daily US COVID-19 vaccinations in part of 2021. This project was created for CS573 Data Visualization at Worcester Polytechnic Institute in Fall 2021. For the completed visualization see [Section 5, Final Visualization](#5-final-dashboard). Clicking on any of the images will take you to a VizHub page where you can explore each version of the dashboard or fork it for your own project!
 
+A video walkthrough of the completed dashboard can be found [here](https://youtu.be/iJh7S_nWXp0).
+
 ## 1. Data: US Vaccination Data by State/Territory
 
 The data I propose to visualize for this project is [Data on COVID-19 Vaccinations by Our World in Data](https://github.com/owid/covid-19-data/tree/master/public/data/vaccinations). This dataset contains information about the number of COVID-19 vaccinations given per day by US State/Territory as well as information about the total vaccination level of each state, number of doses available, and total dose utilization. I have filtered this dataset to time period 04/01/2021 - 09/04/2021 to reduce the quantity of data to process for this visualization.
